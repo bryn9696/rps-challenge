@@ -1,0 +1,25 @@
+<h1><%=@game.player1.name%> VS <%= @game.player2.name %></h1>
+
+<form action="/player1_move" method="post">
+  <div>
+    <label for="Rock">Rock</label>
+    <input type="radio" name="move" value="Rock">
+    <label for="Paper">Paper</label>
+    <input type="radio" name="move" value="Paper">
+    <label for="Scissor">Scissor</label>
+    <input type="radio" name="move" value="Scissor">
+    <button type="submit" value="submit"><%= @game.player1.name %>'s move</button>
+  </div>
+</form>
+
+<% if @game_mode == 'single_player'%>
+
+<br><%= @game.player1.name %> played <%= @game.player1.move %>
+<br><%= @game.player2.name %> played <%= @game.player2.makemove %>
+
+<br><%= Results.new.decision(@game.player1.move, @game.player2.makemove) %> wins!
+
+<form action="/play" method="get">
+<button type="submit" value="submit">Play again</button>
+</form>
+<% end %>
